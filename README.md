@@ -21,4 +21,10 @@ Extension settings can be accessed via admin path
 
 > Store > Configuration > RedChamps > IP Security
 
+## Contribution
+
+Pull requests are more than welcome.
+
+We will be glad if you can fix any of existing issues listed in the repository or if you would like to improve the extension code. 
+
 **Please visit our store https://redchamps.com for more free/paid extensions.**

@@ -69,7 +69,7 @@ class Heading extends Field
                     <a href="https://redchamps.com/" target="_blank">RedChamps</a>. 
                     <b>
                     Found a bug? Report it 
-                    <a href="https://github.com/magento/magento2/issues" target="_blank">here</a>
+                    <a href="https://github.com/redchamps/ip-security/issues" target="_blank">here</a>
                     </b>
                     </span>
             </div>';

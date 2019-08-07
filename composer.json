@@ -1,12 +1,14 @@
 {
     "name": "redchamps/module-ip-security",
-    "description": "",
+    "description": "Magento 2 Extension to restrict access to your website via IP address or to close your shop for maintenance.",
     "type": "magento2-module",
     "version": "1.0.0",
     "require": {
+        "magento/framework": "*"
     },
     "license": [
-        "RedChamps EULA"
+        "OSL-3.0",
+        "AFL-3.0"
     ],
     "autoload": {
         "files": [
