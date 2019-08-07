@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="redchamps" translate="label" sortOrder="99999">
+            <label>RedChamps</label>
+        </tab>
+        <section id="ip_security" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>IP Security</label>
+            <tab>redchamps</tab>
+            <resource>RedChamps_IpSecurity::config</resource>
+            <group id="branding" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1"
+                   showInStore="1">
+                <label>RedChamps_IpSecurity</label>
+                <frontend_model>RedChamps\IpSecurity\Block\Adminhtml\System\Config\Form\Heading</frontend_model>
+            </group>
+            <group id="global_settings" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1" translate="label">
+                <label>Global Settings</label>
+                <field id="get_ip_method" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Method to get IP</label>
+                    <comment>Extension receives customer IP from server. Servers can store this information in different variables. Usually variable REMOTE_ADDR is used. But if your server is configured differently, you can select neccessary IP address get method.</comment>
+                    <source_model>RedChamps\IpSecurity\Model\IpVariable</source_model>
+                </field>
+                <field id="methods_information" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <frontend_model>RedChamps\IpSecurity\Block\Adminhtml\GetIpInfo</frontend_model>
+                    <label>Current server values</label>
+                </field>
+                <field id="debug" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>
+                        If enabled, debug information will be logged in file "var/log/ip_security.log"
+                    </comment>
+                </field>
+            </group>
+            <group id="front" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+                <label>IP Security - Frontend</label>
+                <field id="allow" type="textarea" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow these IPs</label>
+                    <comment>Visitors with other IPs will be blocked.</comment>
+                </field>
+                <field id="block" type="textarea" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Block these IPs</label>
+                    <comment>
+                        <![CDATA[
+                    You can enter IP addresses, masks and ranges. Comments are added with character |. Each rule on separate row.<br>Example:<br>127.0.0.1|My address<br>10.*.*.*|internal company IPs<br>10.0.0.1-20.0.0.1|IP Range<br>10.0.0.192/26|IP Range
+                    ]]>
+                    </comment>
+                </field>
+                <field id="redirect_blank" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Redirect to blank page</label>
+                    <comment>
+                        When blocking rule is triggered visitor will be redirected to a blank page with blocking rule description.
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="redirect_page" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Redirect to CMS page</label>
+                    <comment>Visitor will not be notified about blocking rule redirection.</comment>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                    <depends>
+                        <field id="redirect_blank">0</field>
+                    </depends>
+                </field>
+                <field id="email_event" type="textarea" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Mail block events to</label>
+                    <comment>
+                        You can specify multiple recipients by mentioning each email in new line.
+                    </comment>
+                </field>
+                <field id="email_template" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="email_identity" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Store email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="email_always" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email always</label>
+                    <comment>
+                        Yes - mail notification will be sent every time when blocking rule applies. No - mail notification will be sent when IP is blocked for first time and each 10th time blocking occurs.
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="admin" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+                <label>IP Security - Admin</label>
+                <field id="allow" type="textarea" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow these IPs</label>
+                    <comment>Be careful not to lock yourself out!</comment>
+                </field>
+                <field id="block" type="textarea" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Block these IPs</label>
+                    <comment>
+                        <![CDATA[
+                    You can enter IP addresses, masks and ranges. Comments are added with character |. Each rule on separate row.<br>Example:<br>127.0.0.1|My address<br>10.*.*.*|internal company IPs<br>10.0.0.1-20.0.0.1|IP Range<br>10.0.0.192/26|IP Range
+                    ]]>
+                    </comment>
+                </field>
+                <field id="redirect_blank" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Redirect to blank page</label>
+                    <comment>
+                        When blocking rule is triggered visitor will be redirected to a blank page with blocking rule description.
+                    </comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="redirect_page" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Redirect to CMS page</label>
+                    <source_model>Magento\Cms\Model\Config\Source\Page</source_model>
+                    <depends>
+                        <field id="redirect_blank">0</field>
+                    </depends>
+                </field>
+                <field id="email_event" type="textarea" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Mail block events to</label>
+                    <comment>
+                        You can specify multiple recipients by mentioning each email in new line.
+                    </comment>
+                </field>
+                <field id="email_template" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="email_identity" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Store email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="email_always" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Email always</label>
+                    <comment>Yes - mail notification will be sent every time when blocking rule applies. No - mail notification will be sent when IP is blocked for first time and each 10th time blocking occurs.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="maintenance" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" translate="label comment">
+                <label>IP Security - Maintenance page</label>
+                <field id="enabled" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Store Offline</label>
+                    <comment>For frontend only.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="except" type="textarea" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Except these IPs</label>
+                    <comment>Visitors with these IPs will not be redirected to maintenance page.</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="message" type="textarea" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Message</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="remindermessage" type="textarea" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Reminder message</label>
+                    <comment>
+                        This message will be shown on frontend for visitors with IP adresses from exception list while maintenance mode is on.
+                    </comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="token" type="text" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" translate="label">
+                <label>IP Security - Token access</label>
+                <field id="enabled" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable access by token</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <group id="link" type="label" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Generate Access link</label>
+                    <field id="param_name" type="text" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>GET parameter name</label>
+                        <comment>We recommend changing the default name of this parameter - it will complicate the possibility of link brute force. This field is required to create a token. Do not use spaces and special characters.</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="last_updated_date"  translate="label button_label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Access link create time</label>
+                        <frontend_model>RedChamps\IpSecurity\Block\Adminhtml\System\Config\Form\Field\Token\Update\Date</frontend_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="button" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <frontend_model>RedChamps\IpSecurity\Block\Adminhtml\System\Config\Form\Field\Token\Button</frontend_model>
+                        <comment>When creating a new token, old link is deactivated</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="front" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Access link to Site</label>
+                        <comment>Use this link to access the site from the blocked IP addresses. Note the token and cookie lifetimes.</comment>
+                        <frontend_model>RedChamps\IpSecurity\Block\Adminhtml\System\Config\Form\Field\Token\Link</frontend_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="admin" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Access link to Admin page</label>
+                        <comment>
+                            Use this link to access the site administration panel from the blocked IP addresses. Note the token and cookie lifetimes.
+                        </comment>
+                        <frontend_model>RedChamps\IpSecurity\Block\Adminhtml\System\Config\Form\Field\Token\Admin\Link</frontend_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </group>
+                <group id="validity" type="label" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Validity</label>
+                    <field id="token_expire" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Validity period of token</label>
+                        <comment>
+                            Measured in days. After this time the access link will not be available. The countdown starts from access link create time.
+                        </comment>
+                        <source_model>RedChamps\IpSecurity\Model\System\Config\Source\Token\Expire</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="cookie_expire" type="select" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Cookie lifetime</label>
+                        <comment>
+                            Measured in hours. The countdown starts from the last page visit by the access link or the last action on the site after using the access link. After this time, access to the site from the banned IP addresses will not be possible without re-entering access link.
+                        </comment>
+                        <source_model>RedChamps\IpSecurity\Model\System\Config\Source\Cookie\Expire</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </group>
+                <group id="notification" type="label" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Notification</label>
+                    <field id="email_always" type="select" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Notify when Access Link is used</label>
+                        <comment>Yes - the notification will be sent on any attempt to use the access link. No - the notification will be sent only on a successful attempt.</comment>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="email_event" type="textarea" translate="label comment" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Email for notification</label>
+                        <comment>You can specify multiple recipients. Comma separated. For example: admin1@example.com, admin2@example.com</comment>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="email_template" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Authentication success email template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="fail_email_template" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Authentication fail email template</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                        <depends>
+                            <field id="enabled">1</field>
+                        </depends>
+                    </field>
+                    <field id="email_identity" type="select" translate="label" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Sender email</label>
+                        <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    </field>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </group>
+            </group>
+        </section>
+    </system>
+</config>

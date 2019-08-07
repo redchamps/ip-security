@@ -1,0 +1,34 @@
+<?php
+$msg = '';
+$isAccessByTokenEnabled = $block->isEnabledIpSecurityToken();
+
+$urlToSystemConfig = $block->getUrl("adminhtml/system_config/edit/section/ip_security");
+
+if (!$isAccessByTokenEnabled) {
+    $message = "Access by security token is disabled, you can enable access in the <a href='%1' target='_blank'>module settings</a>.";
+    $msg .= __($message, $urlToSystemConfig);
+    $msg .= '<br/>';
+}
+
+$tokenLink = $block->getToken();
+
+if ($tokenLink != '') {
+    $msg .= __('Current token is:');
+    $msg .= ' ' . $tokenLink;
+    $msg .= '<br/>';
+}
+
+$msg .= $block->getTokenExpiredTimeMessage();
+$msg .= '<br/>';
+
+if ($isAccessByTokenEnabled) {
+    $message = "You can change Token Access settings in the <a href='%1' target='_blank'>module settings</a>.";
+    $msg .= __($message, $urlToSystemConfig);
+    $msg .= '<br/>';
+}
+
+?>
+
+<div class="content-header" style="margin-bottom: 50px;">
+    <?= /* @noEscape */ $msg ?>
+</div>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="ip_security_front_email_template" label="Security Violence to Frontend" file="ip_security.html" type="text" module="RedChamps_IpSecurity" area="adminhtml"/>
+    <template id="ip_security_admin_email_template" label="Security Violence to Admin" file="ip_security_admin.html" type="text" module="RedChamps_IpSecurity" area="adminhtml"/>
+    <template id="ip_security_token_notification_email_template" label="Successful authentication by token" file="ip_security_token.html" type="text" module="RedChamps_IpSecurity" area="adminhtml"/>
+    <template id="ip_security_token_notification_fail_email_template" label="Unsuccessful authentication by token" file="ip_security_token_fail.html" type="text" module="RedChamps_IpSecurity" area="adminhtml"/>
+</config>

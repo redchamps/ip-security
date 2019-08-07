@@ -1,0 +1,19 @@
+{
+    "name": "redchamps/module-ip-security",
+    "description": "",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "require": {
+    },
+    "license": [
+        "RedChamps EULA"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "RedChamps\\IpSecurity\\": ""
+        }
+    }
+}

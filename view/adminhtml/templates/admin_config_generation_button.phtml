@@ -1,0 +1,82 @@
+<?php
+/**@var RedChamps_IpSecurity_Block_Adminhtml_System_Config_Form_Field_Token_Button $this */
+?>
+
+<button class="scalable" type="button"
+        id="<?= $block->getHtmlId().'_generate' ?>">
+    <span id="ipsecuritytoken_token_generate_button"><?= $block->escapeHtml($block->getData('button_label')) ?></span>
+</button>
+
+&nbsp;
+
+<button class="scalable" type="button"
+        id="<?= $block->getHtmlId().'_delete' ?>">
+    <span id="ipsecuritytoken_token_remove_button"><?= $block->escapeHtml($block->getData('button_label_delete')) ?></span>
+</button>
+
+
+<script type="text/javascript">
+    require(
+        ['jquery'],
+        function ($) {
+            $(document).ready(function () {
+                $('#ip_security_token_link_button_generate').on('click', function () {
+                    $('body').loader('show');
+                    $.ajax({
+                        url: '<?= /* @noEscape */ $block->getAjaxUrl() ?>',
+                        data:{
+                            "ip_security_token_name": $("#ip_security_token_link_param_name").val(),
+                            "form_key": '<?= /* @noEscape */ $block->getData('form_key') ?>'
+                        },
+                        success:function (data) {
+                            try {
+                                if(data.error) {
+                                    alert(data.message);
+                                } else {
+                                    var response = eval('(' + data + ')');
+                                    $("#ip_security_token_link_front").html(response.frontUrl);
+                                    $("#ip_security_token_link_admin").html(response.adminUrl);
+                                    $("#ip_security_token_last_updated_date").text(response.date);
+                                }
+                            } catch (e) {
+                            }
+                            $('body').loader('hide');
+                        },
+                        error:function (request, status, error) {
+                            $('body').loader('hide');
+                            alert(request.responseText);
+                        }
+                    });
+                });
+                $('#ip_security_token_link_button_delete').on('click', function () {
+                    $('body').loader('show');
+                    $.ajax({
+                        url: '<?= /* @noEscape */ $block->getData('ajax_url_delete') ?>',
+                        data:{
+                            "ip_security_token_name": $("#ip_security_token_link_param_name").value,
+                            "form_key": '<?= /* @noEscape */ $block->getData('form_key') ?>'
+                        },
+
+                        success:function (data) {
+                            try {
+                                if(data.error) {
+                                    alert(data.message);
+                                } else {
+                                    var response = eval('(' + data + ')');
+                                    $("#ip_security_token_link_front").innerHTML = response.frontUrl;
+                                    $("#ip_security_token_link_admin").innerHTML = response.adminUrl;
+                                    $("#ip_security_token_last_updated_date").text(response.date);
+                                }
+                            } catch (e) {
+                            }
+                            $('body').loader('hide');
+                        },
+                        error:function (request, status, error) {
+                            $('body').loader('hide');
+                            alert(request.responseText);
+                        }
+                    });
+                });
+            });
+        });
+</script>

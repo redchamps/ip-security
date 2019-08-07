@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ip_security>
+            <global_settings>
+                <get_ip_method>REMOTE_ADDR</get_ip_method>
+            </global_settings>
+            <front>
+                <email_always>0</email_always>
+            </front>
+            <admin>
+                <email_always>0</email_always>
+            </admin>
+            <maintenance>
+                <enabled>0</enabled>
+                <message>
+                    <![CDATA[
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<head>
+    <title>We're sorry, but our website is under maintenance.</title>
+    <style>
+    body {
+    background:#FFF none repeat scroll 0 0;
+    color:#000;
+    font-family:Helvetica,Arial,Verdana,sans-serif;
+    font-size:12px;
+
+    margin:0;
+    padding:0;
+    text-align:center;
+    }
+    h1
+    {
+     margin:0px;
+     padding:0px;
+      margin-top:30%;
+      font-size: 25pt;
+      display:block;
+    }
+    h2
+    {
+     padding:0px;
+      margin-top: 5px;
+      font-size: 18pt;
+    }
+
+    </style>
+</head>
+
+<body>
+    <h1>We're sorry, but our website is under maintenance.</h1>
+    <h2>Please try refreshing this page later.</h2>
+</body>]]>
+
+
+                </message>
+                <remindermessage>
+                    <![CDATA[
+                    <p style="margin:0; padding:6px 10px; background:#d75f07; font-size:12px; line-height:1.15; text-align:center; color:#fff;">
+                        This store is under maintenance. Yo can see this page because your IP is in exception list.
+                    </p>
+                    ]]>
+                </remindermessage>
+            </maintenance>
+            <token>
+                <enabled>0</enabled>
+                <link>
+                    <param_name>ipbypas</param_name>
+                </link>
+                <validity>
+                    <token_expire>14</token_expire>
+                    <cookie_expire>24</cookie_expire>
+                </validity>
+            </token>
+        </ip_security>
+    </default>
+</config>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Customer::customer">
+                    <resource id="RedChamps_IpSecurity::menu" title="Ip Security" translate="title" sortOrder="10">
+                        <resource id="RedChamps_IpSecurity::log" title="Security Log" translate="title" sortOrder="10" />
+                        <resource id="RedChamps_IpSecurity::token_log" title="Security Token Log" translate="title" sortOrder="10" />
+                        <resource id="RedChamps_IpSecurity::settings" title="Settings" translate="title" sortOrder="20" />
+                    </resource>
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="RedChamps_IpSecurity::config" title="Ip Security Settings" translate="title" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

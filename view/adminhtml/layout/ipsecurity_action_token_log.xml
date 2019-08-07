@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <body>
+        <referenceContainer name="content">
+            <block template="RedChamps_IpSecurity::tokenlog-grid-comment.phtml" class="RedChamps\IpSecurity\Block\Adminhtml\Token\Log\Comment" name="ipsecutity.token.log.grid.comment"/>
+            <block class="RedChamps\IpSecurity\Block\Adminhtml\Token\Log" name="log"/>
+        </referenceContainer>
+    </body>
+</page>

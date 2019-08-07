@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="RedChamps_IpSecurity::menu" title="Ip Security" module="RedChamps_IpSecurity" sortOrder="50" dependsOnModule="RedChamps_IpSecurity" parent="Magento_Customer::customer" resource="RedChamps_IpSecurity::menu"/>
+        <add id="RedChamps_IpSecurity::log" title="Security Log" module="RedChamps_IpSecurity" sortOrder="10" parent="RedChamps_IpSecurity::menu" action="ipsecurity/action/log" resource="RedChamps_IpSecurity::log"/>
+        <add id="RedChamps_IpSecurity::token_log" title="Security Token Log" module="RedChamps_IpSecurity" sortOrder="10" parent="RedChamps_IpSecurity::menu" action="ipsecurity/action/token_log" resource="RedChamps_IpSecurity::token_log"/>
+        <add id="RedChamps_IpSecurity::settings" title="Settings" module="RedChamps_IpSecurity" sortOrder="10" parent="RedChamps_IpSecurity::menu" action="adminhtml/system_config/edit/section/ip_security/" resource="RedChamps_IpSecurity::settings"/>
+    </menu>
+</config>
