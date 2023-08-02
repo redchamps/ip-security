@@ -39,7 +39,7 @@ class EmailSender
             );
 
             // Set all required params and send emails
-            $mailer->setFrom($sender, $storeId);
+            $mailer->setFromByScope($sender, $storeId);
 
             $mailer->setTemplateIdentifier($template);
 

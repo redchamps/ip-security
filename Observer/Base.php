@@ -145,8 +145,11 @@ abstract class Base implements ObserverInterface
      */
     protected function trimTrailingSlashes($str)
     {
-        $str = trim($str);
-        return $str == '/' ? $str : rtrim($str, '/');
+        if ($str) {
+            $str = trim($str);
+            return $str == '/' ? $str : rtrim($str, '/');
+        }
+        return $str;
     }
 
     /**
@@ -387,13 +390,16 @@ abstract class Base implements ObserverInterface
      */
     protected function _ipTextToArray($text)
     {
-        $ips = preg_split("/[\n\r]+/", $text);
-        foreach ($ips as $ipsk => $ipsv) {
-            if (trim($ipsv) == "") {
-                unset($ips[$ipsk]);
+        if ($text) {
+            $ips = preg_split("/[\n\r]+/", $text);
+            foreach ($ips as $ipsk => $ipsv) {
+                if ($ipsv && trim($ipsv) == "") {
+                    unset($ips[$ipsk]);
+                }
             }
+            return $ips;
         }
-        return $ips;
+        return [];
     }
 
     /**
@@ -1164,7 +1170,7 @@ abstract class Base implements ObserverInterface
         }
         $scope = $this->_getScopeName();
 
-        if (!strlen($this->_redirectPage)) {
+        if (!$this->_redirectPage || !strlen($this->_redirectPage)) {
             $this->_redirectPage = $this->trimTrailingSlashes($this->url->getUrl('no-route'));
         }
 
@@ -1305,20 +1311,16 @@ abstract class Base implements ObserverInterface
             $params['blocked_from'] = 'undefined';
         }
 
-        $now = $this->timeZone->formatDate(
-            null,
-            'Y-m-d H:i:s',
-            true
-        );
+        $now = $this->timeZone->date()->format('Y-m-d H:i:s');
 
-        /* @var $logTable RedChamps_IpSecurity_Model_ResourceModel_Ipsecuritylog_Collection */
+        /* @var $logTable \RedChamps\IpSecurity\Model\ResourceModel\Ipsecuritylog\Collection */
         $logTable = $this->ipSecurityLogCollectionFactory->create();
         $logTable->getSelect()->where('blocked_from=?', $params['blocked_from'])
             ->where('blocked_ip=?', $params['blocked_ip']);
 
         if (count($logTable) > 0) {
             foreach ($logTable as $row) {
-                /* @var $row RedChamps_IpSecurity_Model_Ipsecuritylog */
+                /* @var \RedChamps\IpSecurity\Model\Ipsecuritylog $row */
                 $timesBlocked = $row->getData('qty') + 1;
                 $row->setData('qty', $timesBlocked);
                 $row->setData('last_block_rule', $this->getLastBlockRule());

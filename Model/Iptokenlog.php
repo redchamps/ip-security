@@ -1,10 +1,12 @@
 <?php
 namespace RedChamps\IpSecurity\Model;
 
+use Magento\Framework\Model\AbstractModel;
+
 /**
  * Class RedChamps_IpSecurity_Model_Iptokenlog
  */
-class Iptokenlog extends \Magento\Framework\Model\AbstractModel
+class Iptokenlog extends AbstractModel
 {
     /**
      * Internal constructor
